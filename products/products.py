@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from API.api import GetAllProducts, GetSingleProducts
 products_bp = Blueprint('products_bp', __name__,
     template_folder='templates',
@@ -13,6 +13,32 @@ def index():
 
 @products_bp.route('/products/<int:id>')
 def detailOfProduct(id):
-    data = GetSingleProducts(id)
+    OneProduct = GetSingleProducts(id)
 
-    return render_template('products/detail.html', detailOfPorduct = data)
+    count = 0
+    data = []
+    for item in GetAllProducts():
+        if(item['category'] == OneProduct['category']):
+            count = count + 1
+            data.append(item)
+        if(count == 4):
+            break
+
+    return render_template('products/detail.html', detailOfPorduct = OneProduct, OtherProducts = data)
+
+@products_bp.route('/process-selection', methods=['POST', 'GET'])
+def process_selection():
+    if request.method == 'POST':
+        selected_item = request.form.get('selected_item')
+        count = 0
+        data = []
+        for item in GetAllProducts():
+            if(item['category'] == selected_item):
+                count = count + 1
+                data.append(item)
+            if(count == 4):
+                break
+        l = len(data)
+        return render_template('products/sort.html', products = data, length = l)
+    
+    return render_template('products/products.html', products = GetAllProducts(), length = len(GetAllProducts()))

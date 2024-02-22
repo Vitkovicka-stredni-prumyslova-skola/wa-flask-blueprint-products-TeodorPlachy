@@ -22,6 +22,7 @@ def GetSingleProducts(id):
     request = requests.get(f"{URL_API}/products/" + str(id))
     
     return json.loads(request.text)
+
  
     
 
