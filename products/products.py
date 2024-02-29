@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from API.api import GetAllProducts, GetSingleProducts
+from API.api import GetAllProducts, GetSingleProducts, GetCategories
 products_bp = Blueprint('products_bp', __name__,
     template_folder='templates',
     static_folder='static')
@@ -30,15 +30,13 @@ def detailOfProduct(id):
 def process_selection():
     if request.method == 'POST':
         selected_item = request.form.get('selected_item')
-        count = 0
         data = []
         for item in GetAllProducts():
             if(item['category'] == selected_item):
-                count = count + 1
                 data.append(item)
-            if(count == 4):
-                break
         l = len(data)
-        return render_template('products/sort.html', products = data, length = l)
+        categories = GetCategories()
+
+        return render_template('products/sort.html', products = data, length = l, categories = categories)
     
-    return render_template('products/products.html', products = GetAllProducts(), length = len(GetAllProducts()))
+    return render_template('products/products.html', products = GetAllProducts(), length = len(GetAllProducts()), categories = categories)

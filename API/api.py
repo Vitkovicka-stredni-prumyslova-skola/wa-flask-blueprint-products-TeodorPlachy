@@ -23,6 +23,22 @@ def GetSingleProducts(id):
     
     return json.loads(request.text)
 
+
+def GetCategories():
+    
+    all_categories = []
+
+    for item in GetAllProducts():
+        if item['category'] in all_categories:
+            continue
+        else:
+            all_categories.append(item['category'])
+
+    all_categories = sorted(all_categories)
+
+    return json.loads(json.dumps(all_categories))
+
+
  
     
 

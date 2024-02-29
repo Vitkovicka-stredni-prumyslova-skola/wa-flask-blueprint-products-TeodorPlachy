@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from API.api import GetCategories
 
 general_bp = Blueprint('general_bp', __name__,
     template_folder='templates',
@@ -6,4 +7,6 @@ general_bp = Blueprint('general_bp', __name__,
 
 @general_bp.route('/')
 def index():
-    return render_template('general/index.html')
+    categories = GetCategories()
+    
+    return render_template('general/index.html', length = len(categories), categories = categories)
