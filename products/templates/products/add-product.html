@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+<head>
+    <script src="../assets/js/color-modes.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>Checkout example · Bootstrap v5.3</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/checkout/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    <style>
+        /* CSS styles */
+    </style>
+</head>
+<body class="bg-body-tertiary" style="background-color: rgb(32 32 32); color: white;">
+<div class="container">
+    <main>
+        <div class="py-5 text-center">
+            <!-- Optional: Additional content -->
+        </div>
+        <div class="row g-5">
+            <div class="col-md-7-col-lg-8">
+                <h2 class="mb-3">Vytvořit nový produkt</h2>
+                <form class="needs-validation" method="POST" action="{{ url_for('products_bp.checkout') }}" novalidate>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label for="nazev" class="form-label">Název</label>
+                            <input type="text" class="form-control" id="nazev" name="nazev" placeholder="Vložte název produktu" required style="background-color: rgb(99, 99, 99); border-color: black; color: white;">
+                        </div>
+                        <div class="col-12">
+                            <label for="popis" class="form-label">Popis</label>
+                            <textarea class="form-control large-input" id="popis" name="popis" placeholder="Vložte popis produktu" required style="max-height: 20rem;background-color: rgb(99, 99, 99);border-color: black;"></textarea>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="category" class="form-label">Kategorie</label>
+                            <select class="form-select" id="category" name="category" required style="background-color: rgb(99, 99, 99);border-color: black;">
+                                <option>electronics</option> <!-- Adjust as per your requirement -->
+                                <option>jewelery</option>
+                                <option>men's clothing</option>
+                                <option>women's clothing </option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6" style="width:50% !important">
+                            <label for="cena" class="form-label">Cena</label>
+                            <input type="text" class="form-control" id="cena" name="cena" placeholder="Základní cena produktu" required style="background-color: rgb(99, 99, 99);border-color: black;">
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Přidat produkt</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer class="my-5 pt-5 text-body-secondary text-center text-small">
+        <!-- Optional: Footer content -->
+    </footer>
+</div>
+<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="checkout.js"></script>
+</body>
+</html>

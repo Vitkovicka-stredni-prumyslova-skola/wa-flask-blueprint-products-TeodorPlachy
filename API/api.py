@@ -39,6 +39,12 @@ def GetCategories():
     return json.loads(json.dumps(all_categories))
 
 
+def CreateProduct(data):   
+    headers = {'Content-Type': 'application/json'}
+    response = requests.post(f"{URL_API}/products", headers=headers, data=json.dumps(data))
+    return response.json()
+
+
  
     
 
